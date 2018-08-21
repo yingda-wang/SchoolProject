@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.BasicMapper" >
+	<insert id="basicAdd" parameterType="pojo.Basic">
+		insert into basice(studyFrom,name,company,department,post,phone,studyTime)values(#{studyFrom},#{name},#{company},#{department},#{post},#{phone},#{studyTime})
+	</insert>
+	<select id="basicSearch" resultType="pojo.Basic">
+		SELECT * FROM basice
+	</select>
+	<select id="getbasicLike" parameterType="String" resultType="pojo.Basic" >
+		SELECT * FROM basice WHERE basice.name like  CONCAT('%', #{searchName}, '%')
+	</select>
+	<delete id="delbasic" parameterType="String" >
+	  DELETE FROM basice WHERE phone=#{phone}
+	</delete>
+</mapper>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DevicemaintenanceMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Devicemaintenance" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="mid" property="mid" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="time1" property="time1" jdbcType="DATE" />
+    <result column="time2" property="time2" jdbcType="DATE" />
+    <result column="time3" property="time3" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, mid, model, time1, time2, time3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.DevicemaintenanceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from devicemaintenance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from devicemaintenance
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from devicemaintenance
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.DevicemaintenanceExample" >
+    delete from devicemaintenance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Devicemaintenance" >
+    insert into devicemaintenance (id, mid, model, 
+      time1, time2, time3)
+    values (#{id,jdbcType=BIGINT}, #{mid,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{time1,jdbcType=DATE}, #{time2,jdbcType=DATE}, #{time3,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Devicemaintenance" >
+    insert into devicemaintenance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="time1 != null" >
+        time1,
+      </if>
+      <if test="time2 != null" >
+        time2,
+      </if>
+      <if test="time3 != null" >
+        time3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mid != null" >
+        #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null" >
+        #{time1,jdbcType=DATE},
+      </if>
+      <if test="time2 != null" >
+        #{time2,jdbcType=DATE},
+      </if>
+      <if test="time3 != null" >
+        #{time3,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.DevicemaintenanceExample" resultType="java.lang.Integer" >
+    select count(*) from devicemaintenance
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update devicemaintenance
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.mid != null" >
+        mid = #{record.mid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time1 != null" >
+        time1 = #{record.time1,jdbcType=DATE},
+      </if>
+      <if test="record.time2 != null" >
+        time2 = #{record.time2,jdbcType=DATE},
+      </if>
+      <if test="record.time3 != null" >
+        time3 = #{record.time3,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update devicemaintenance
+    set id = #{record.id,jdbcType=BIGINT},
+      mid = #{record.mid,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      time1 = #{record.time1,jdbcType=DATE},
+      time2 = #{record.time2,jdbcType=DATE},
+      time3 = #{record.time3,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Devicemaintenance" >
+    update devicemaintenance
+    <set >
+      <if test="mid != null" >
+        mid = #{mid,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null" >
+        time1 = #{time1,jdbcType=DATE},
+      </if>
+      <if test="time2 != null" >
+        time2 = #{time2,jdbcType=DATE},
+      </if>
+      <if test="time3 != null" >
+        time3 = #{time3,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Devicemaintenance" >
+    update devicemaintenance
+    set mid = #{mid,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      time1 = #{time1,jdbcType=DATE},
+      time2 = #{time2,jdbcType=DATE},
+      time3 = #{time3,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

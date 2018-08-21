@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DevicerecivierMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Devicerecivier" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="receiver" property="receiver" jdbcType="VARCHAR" />
+    <result column="deviceName" property="devicename" jdbcType="VARCHAR" />
+    <result column="deviceCoding" property="devicecoding" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="tempSavePolice" property="tempsavepolice" jdbcType="VARCHAR" />
+    <result column="nowRemain" property="nowremain" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, date, receiver, deviceName, deviceCoding, number, tempSavePolice, nowRemain
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.DevicerecivierExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from devicerecivier
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from devicerecivier
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from devicerecivier
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.DevicerecivierExample" >
+    delete from devicerecivier
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Devicerecivier" >
+    insert into devicerecivier (id, date, receiver, 
+      deviceName, deviceCoding, number, 
+      tempSavePolice, nowRemain)
+    values (#{id,jdbcType=BIGINT}, #{date,jdbcType=DATE}, #{receiver,jdbcType=VARCHAR}, 
+      #{devicename,jdbcType=VARCHAR}, #{devicecoding,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{tempsavepolice,jdbcType=VARCHAR}, #{nowremain,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Devicerecivier" >
+    insert into devicerecivier
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="receiver != null" >
+        receiver,
+      </if>
+      <if test="devicename != null" >
+        deviceName,
+      </if>
+      <if test="devicecoding != null" >
+        deviceCoding,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="tempsavepolice != null" >
+        tempSavePolice,
+      </if>
+      <if test="nowremain != null" >
+        nowRemain,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="receiver != null" >
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="devicecoding != null" >
+        #{devicecoding,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="tempsavepolice != null" >
+        #{tempsavepolice,jdbcType=VARCHAR},
+      </if>
+      <if test="nowremain != null" >
+        #{nowremain,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.DevicerecivierExample" resultType="java.lang.Integer" >
+    select count(*) from devicerecivier
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update devicerecivier
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.receiver != null" >
+        receiver = #{record.receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicename != null" >
+        deviceName = #{record.devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicecoding != null" >
+        deviceCoding = #{record.devicecoding,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.tempsavepolice != null" >
+        tempSavePolice = #{record.tempsavepolice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nowremain != null" >
+        nowRemain = #{record.nowremain,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update devicerecivier
+    set id = #{record.id,jdbcType=BIGINT},
+      date = #{record.date,jdbcType=DATE},
+      receiver = #{record.receiver,jdbcType=VARCHAR},
+      deviceName = #{record.devicename,jdbcType=VARCHAR},
+      deviceCoding = #{record.devicecoding,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      tempSavePolice = #{record.tempsavepolice,jdbcType=VARCHAR},
+      nowRemain = #{record.nowremain,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Devicerecivier" >
+    update devicerecivier
+    <set >
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="receiver != null" >
+        receiver = #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        deviceName = #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="devicecoding != null" >
+        deviceCoding = #{devicecoding,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="tempsavepolice != null" >
+        tempSavePolice = #{tempsavepolice,jdbcType=VARCHAR},
+      </if>
+      <if test="nowremain != null" >
+        nowRemain = #{nowremain,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Devicerecivier" >
+    update devicerecivier
+    set date = #{date,jdbcType=DATE},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      deviceName = #{devicename,jdbcType=VARCHAR},
+      deviceCoding = #{devicecoding,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      tempSavePolice = #{tempsavepolice,jdbcType=VARCHAR},
+      nowRemain = #{nowremain,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

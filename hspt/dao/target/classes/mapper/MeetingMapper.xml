@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.MeetingMapper" >
+	<insert id="meetingAdd" parameterType="ksxs.Meeting">
+		insert into meeting(year,meetingName,proNumber,proleader,creditType,credit,startTime,offTime,partiNumber,fileSave,filePerson)values(#{year},#{meetingName},#{proNumber},#{proleader},#{creditType},#{credit},#{startTime},#{offTime},#{partiNumber},#{fileSave},#{filePerson})
+	</insert>
+	<select id="meetingSearch" resultType="ksxs.Meeting">
+		SELECT * FROM meeting
+	</select>
+	<select id="getmeetingLike" resultType="ksxs.Meeting">
+		SELECT * FROM meeting WHERE meeting.year like  CONCAT('%', #{searchName}, '%')
+	</select>
+	
+	<delete id="delmeeting" parameterType="int" >
+	  DELETE FROM meeting WHERE id=#{id}
+	</delete>
+</mapper>

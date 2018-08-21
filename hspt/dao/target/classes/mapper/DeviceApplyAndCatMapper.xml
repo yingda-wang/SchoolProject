@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DeviceApplyAndCatMapper" >
+	<select id="getList"  resultType="jl.DeviceApplyAndCat" >
+		SELECT a.id,a.name,a.number,a.arrivetime,a.applicant,a.did,a.ifyes,b.type FROM deviceapply a , devicecat b WHERE a.dId=b.id
+	</select>
+</mapper>

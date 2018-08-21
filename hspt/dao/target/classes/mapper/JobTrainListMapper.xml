@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.JobTrainListMapper">
+	<insert id="setJobTrain" parameterType="job.JobTrain">
+		insert into jobtrain (pid,trainer,time,gId,save)	values (#{pId},#{trainer},#{time},#{gId},#{save})
+	</insert>
+	
+	<select id="getZu" resultType="user.ZPosition">
+		SELECT * FROM zu
+	</select>
+	
+	<select id="getJobTrainInfo" resultType="job.JobTrain" parameterType="int">
+		SELECT * FROM jobtrain,zu,POSITION WHERE  jobtrain.gId = position.id AND position.zId = zu.id AND zu.id = #{zId}
+	</select>
+	
+	<delete id="delJobTrainInfo" parameterType="int" >
+	  DELETE FROM jobtrain WHERE id=#{id}
+	</delete>
+	
+	<select id="getUserInfoLike" parameterType="String" resultType="user.UserInfoLike" >
+		SELECT * FROM jobtrain,zu,POSITION WHERE zu.id=position.zId AND
+		position.id=jobtrain.gId and jobtrain.trainer like '%${value}%'
+	</select>
+	
+	<update id="updateJobTrainInfo" parameterType="job.JobTrain" >
+	update jobtrain set 
+	trainer=#{trainer},time=#{time},gId=#{gId}
+	where id=#{id}
+	</update>
+	
+	<select id="getJobTrainLike" parameterType="String" resultType="job.JobTrain" >
+		 SELECT * FROM jobtrain,position,zu WHERE jobtrain.gId=position.id AND zu.id=position.zId AND jobtrain.trainer like CONCAT('%',#{searchName},'%')
+	</select>
+	
+</mapper>

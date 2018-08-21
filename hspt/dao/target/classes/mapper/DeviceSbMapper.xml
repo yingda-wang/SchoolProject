@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DeviceSbMapper" >
+	<select id="getCsByBh" parameterType="java.lang.String" resultType="jl.Cs">
+		SELECT a.model AS specification, a.name AS devicename, b.id AS zid,b.name AS zname FROM device a,zu b WHERE a.zid=b.id AND a.sbid=#{bh} 
+	</select>
+	
+</mapper>

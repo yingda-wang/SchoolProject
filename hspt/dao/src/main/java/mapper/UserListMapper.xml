@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.UserListMapper">
+	<select id="getNation" resultType="user.Nation">
+		SELECT * FROM nation
+	</select>
+	<select id="getParty" resultType="user.Party">
+		SELECT * FROM party
+	</select>
+	<select id="getTechnical" resultType="user.Technical">
+		SELECT * FROM technical
+	</select>
+	<insert id="setUserInfo" parameterType="user.UserInfo">
+
+	<!-- INSERT INTO information (id,NAME,sex,nation,idcard,classes,phone,chara,birth,degree,gradeTime,workTime,party,duty,engageTime,technical,technicalTime,teacherposition,teacherTime,tutor,tutorTime,gId) 
+		VALUES(1,'sd','sd','sd','sd','sd','sd','asd','sd','sd','sd','sd','sd','sd','sd','sad','sad','sd','sd','sd','sd',1) -->
+	insert into information
+	(id,NAME,sex,nation,idcard,classes,phone,chara,birth,degree,graduateTime,workTime,party,duty,engageTime,technical,technicalTime,teacherposition,teacherTime,tutor,tutorTime,gId,password,roleName)
+	values
+	(#{id},#{name},#{sex},#{nation},#{idcard},#{classes},#{phone},#{chara},
+	#{birth},#{degree},#{graduateTime},#{workTime},#{party},#{duty},#{engageTime},
+	#{technical},#{technicalTime},#{teacherPosition},#{teacherTime},#{tutor},
+	#{tutorTime},#{gId},#{password},#{roleName})
+</insert>
+	<select id="getUserInfo" resultType="user.UserInfo">
+		SELECT * FROM information,zu,POSITION WHERE zu.id=position.zId AND
+		position.id=information.gId
+	</select>
+	
+	<select id="getPersonInfo" resultType="user.UserInfo" parameterType="int">
+		SELECT * FROM information,zu,POSITION WHERE zu.id=position.zId AND
+		position.id=information.gId and information.id=#{id}
+	</select>
+	
+	<select id="getSessionUserInfo" resultType="user.UserInfo" parameterType="int">
+		SELECT * FROM information,zu,POSITION WHERE zu.id=position.zId AND
+		position.id=information.gId and information.id=#{id}
+	</select>
+	
+	<select id="getUserInfoLike" parameterType="String" resultType="user.UserInfoLike" >
+		SELECT * FROM information ,zu,POSITION WHERE zu.id=position.zId AND
+		position.id=information.gId and information.name like  CONCAT('%', #{searchName}, '%')
+	</select>
+	<select id="getZu" resultType="user.ZPosition">
+		SELECT * FROM zu
+	</select>
+	<select id="getPosition" parameterType="int" resultType="user.ZPosition">
+		SELECT * FROM position where zId = #{zId}
+	</select>
+	<delete id="delUserInfo" parameterType="int" >
+	  DELETE FROM information WHERE id=#{id}
+	</delete>
+	<update id="updateQx" parameterType="user.UserQx" >
+	 UPDATE information SET qx= #{qx} where id=#{id}
+	</update>
+	<update id="updateUserInfo" parameterType="user.UserInfo" >
+	update  information set 
+	 NAME=#{name},sex=#{sex},nation=#{nation},idcard=#{idcard},classes=#{classes}
+	,phone=#{phone},chara=#{chara},birth=#{birth},degree=#{degree},graduateTime=#{graduateTime}
+	,workTime=#{workTime},party=#{party},duty=#{duty},engageTime=#{engageTime}
+	,technical=#{technical},technicalTime=#{technicalTime},teacherposition=#{teacherPosition}
+	,teacherTime=#{teacherTime},tutor=#{tutor},tutorTime=#{tutorTime},gId=#{gId}
+	,password=#{password},roleName=#{roleName}
+	where id=#{id}
+	</update>
+	<update id="updatePersonInfo" parameterType="user.UserInfo" >
+	 UPDATE information SET roleName= #{roleName},gId=#{gId} where id=#{id}
+	</update>
+	
+</mapper>

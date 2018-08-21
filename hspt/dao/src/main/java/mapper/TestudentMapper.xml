@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mapper.TestudentMapper">
+
+	<insert id="testudent_ADD" parameterType="pojo.Testudent">
+
+		insert into
+		testudent(id,teaching,cyear,tname,type,major)
+		values(#{id},#{teaching},#{cyear},#{tname},#{type},#{major})
+	</insert>
+
+	<select id="testudent_SELECTALL" resultType="pojo.Testudent">
+		SELECT * from testudent
+	</select>
+	
+    <select id="gettestudentInfo" resultType="pojo.Testudent">
+		SELECT * FROM testudent
+	</select>
+		<select id="gettestudentInfoLike" parameterType="String" resultType="pojo.Testudent" >
+		SELECT * FROM testudent WHERE testudent.id  like  CONCAT('%', #{id}, '%')
+		
+	</select>
+	<delete id="deltestudentInfo" parameterType="int" >
+	  DELETE FROM testudent WHERE tId=#{id}
+	</delete>
+    
+    <update id="updatetestudent" parameterType="pojo.Testudent">
+    UPDATE testudent SET teaching=#{teaching},cyear=#{cyear},tname=#{tname},type=#{type},major=#{major} WHERE tId=#{tId}
+    </update>
+  
+    
+</mapper>  

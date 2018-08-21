@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.LbTjMapper" >
+	<select id="getLbTj"  resultType="jl.LbTj">
+SELECT COUNT(*) AS num ,a.cname as type FROM device a WHERE a.state !='报废'  GROUP BY a.cname 
+	</select>
+	<select id="getLbTjByZid"  parameterType="java.lang.String" resultType="jl.LbTj">
+SELECT COUNT(*) AS num ,a.cname as type FROM device a WHERE a.state !='报废' AND a.zname=#{zid} GROUP BY a.cname 
+	</select>
+	<select id="getWxTj" resultType="jl.LbTj">
+SELECT COUNT(*)AS num,c.cname as type FROM devicerepair a,device c WHERE a.assetCoding=c.sbid  GROUP BY c.cname
+	</select>
+	<select id="getWxTjByZid" parameterType="java.lang.String" resultType="jl.LbTj">
+		SELECT COUNT(*)AS num,c.cname AS TYPE FROM devicerepair a,device c WHERE a.assetCoding=c.sbid  AND c.zname =#{zid} GROUP BY c.cname 
+	</select>
+	<select id="getWxTjBySj" resultType="jl.LbTj">
+SELECT COUNT(*)AS num,c.cname AS TYPE FROM devicerepair a,device c WHERE a.assetCoding=c.sbid AND a.applyTime BETWEEN #{0} AND #{1} GROUP BY c.cname 
+	</select>
+	<select id="getWxTjByDc" resultType="jl.LbTj">
+SELECT COUNT(*)AS num,c.cname as type FROM devicerepair a,device c WHERE a.assetCoding=c.sbid AND a.applyTime BETWEEN #{0} AND #{1} AND c.zname=#{2} GROUP BY c.cname 
+	</select>
+	<select id="getWbTj" resultType="jl.LbTj">
+SELECT COUNT(*)AS num,c.cname AS TYPE FROM devicemaintenance a,device c WHERE a.mid=c.sbid    GROUP BY c.cname 
+	</select>
+	<select id="getWbTjByZid" parameterType="java.lang.String" resultType="jl.LbTj">
+SELECT COUNT(*)AS num,c.cname AS TYPE FROM devicemaintenance a,device c WHERE a.mid=c.sbid   AND c.zname=#{zid}  GROUP BY c.cname 	</select>
+	<select id="getWbTjBySj" resultType="jl.LbTj">
+SELECT COUNT(*)AS num,c.cname AS TYPE FROM devicemaintenance a,device c WHERE a.mid=c.sbid  AND a.time1 BETWEEN #{0} AND #{1} GROUP BY c.cname
+	</select>
+	<select id="getWbTjByDc" resultType="jl.LbTj">
+SELECT COUNT(*)AS num,c.cname AS TYPE FROM devicemaintenance a,device c WHERE a.mid=c.sbid  AND a.time1 BETWEEN #{0} AND #{1} and c.zname=#{2} GROUP BY c.cname 	
+</select>
+	</mapper>

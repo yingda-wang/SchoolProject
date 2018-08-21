@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mapper.FworkMapper">
+
+	<insert id="fwork_ADD" parameterType="pojo.Fwork">
+
+		insert into
+		fwork(id,bookName,grade,time,address,bz)
+		values(#{id},#{bookName},#{grade},#{time},#{address},#{bz})
+	</insert>
+
+	<select id="fwork_SELECTALL" resultType="pojo.Fwork">
+		SELECT * from fwork
+	</select>
+	
+    <select id="getfworkInfo" resultType="pojo.Fwork" parameterType="int">
+		SELECT * FROM fwork where fwork.id =#{id}
+	</select>
+	
+	 <select id="getfworkInfoS" resultType="pojo.Fwork">
+		SELECT * FROM fwork 
+	</select>
+	
+	<select id="getfworkInfoLike" parameterType="String" resultType="pojo.Fwork" >
+		SELECT * FROM fwork WHERE fwork.id  like  CONCAT('%', #{id}, '%')
+		
+	</select>
+	<delete id="delfworkInfo" parameterType="int" >
+	  DELETE FROM fwork WHERE gId=#{id}
+	</delete>
+    
+    <update id="updatefwork" parameterType="pojo.Fwork">
+    UPDATE fwork SET bookName=#{bookName},grade=#{grade},time=#{time},address=#{address},bz=#{bz} WHERE id=#{id}
+    </update>
+  
+    
+</mapper>  

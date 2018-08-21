@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DevicerepairMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Devicerepair" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="applyTime" property="applytime" jdbcType="DATE" />
+    <result column="applicant" property="applicant" jdbcType="VARCHAR" />
+    <result column="assetCoding" property="assetcoding" jdbcType="VARCHAR" />
+    <result column="deviceName" property="devicename" jdbcType="VARCHAR" />
+    <result column="deviceModel" property="devicemodel" jdbcType="VARCHAR" />
+    <result column="repairMan" property="repairman" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="INTEGER" />
+    <result column="warrantyTime" property="warrantytime" jdbcType="INTEGER" />
+    <result column="timeOfReturn" property="timeofreturn" jdbcType="DATE" />
+    <result column="returnStatus" property="returnstatus" jdbcType="VARCHAR" />
+    <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, applyTime, applicant, assetCoding, deviceName, deviceModel, repairMan, phone, 
+    warrantyTime, timeOfReturn, returnStatus, Remarks
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.DevicerepairExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from devicerepair
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from devicerepair
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from devicerepair
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.DevicerepairExample" >
+    delete from devicerepair
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Devicerepair" >
+    insert into devicerepair (id, applyTime, applicant, 
+      assetCoding, deviceName, deviceModel, 
+      repairMan, phone, warrantyTime, 
+      timeOfReturn, returnStatus, Remarks
+      )
+    values (#{id,jdbcType=BIGINT}, #{applytime,jdbcType=DATE}, #{applicant,jdbcType=VARCHAR}, 
+      #{assetcoding,jdbcType=VARCHAR}, #{devicename,jdbcType=VARCHAR}, #{devicemodel,jdbcType=VARCHAR}, 
+      #{repairman,jdbcType=VARCHAR}, #{phone,jdbcType=INTEGER}, #{warrantytime,jdbcType=INTEGER}, 
+      #{timeofreturn,jdbcType=DATE}, #{returnstatus,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Devicerepair" >
+    insert into devicerepair
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="applytime != null" >
+        applyTime,
+      </if>
+      <if test="applicant != null" >
+        applicant,
+      </if>
+      <if test="assetcoding != null" >
+        assetCoding,
+      </if>
+      <if test="devicename != null" >
+        deviceName,
+      </if>
+      <if test="devicemodel != null" >
+        deviceModel,
+      </if>
+      <if test="repairman != null" >
+        repairMan,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="warrantytime != null" >
+        warrantyTime,
+      </if>
+      <if test="timeofreturn != null" >
+        timeOfReturn,
+      </if>
+      <if test="returnstatus != null" >
+        returnStatus,
+      </if>
+      <if test="remarks != null" >
+        Remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="applytime != null" >
+        #{applytime,jdbcType=DATE},
+      </if>
+      <if test="applicant != null" >
+        #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="assetcoding != null" >
+        #{assetcoding,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="devicemodel != null" >
+        #{devicemodel,jdbcType=VARCHAR},
+      </if>
+      <if test="repairman != null" >
+        #{repairman,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="warrantytime != null" >
+        #{warrantytime,jdbcType=INTEGER},
+      </if>
+      <if test="timeofreturn != null" >
+        #{timeofreturn,jdbcType=DATE},
+      </if>
+      <if test="returnstatus != null" >
+        #{returnstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.DevicerepairExample" resultType="java.lang.Integer" >
+    select count(*) from devicerepair
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update devicerepair
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.applytime != null" >
+        applyTime = #{record.applytime,jdbcType=DATE},
+      </if>
+      <if test="record.applicant != null" >
+        applicant = #{record.applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assetcoding != null" >
+        assetCoding = #{record.assetcoding,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicename != null" >
+        deviceName = #{record.devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicemodel != null" >
+        deviceModel = #{record.devicemodel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repairman != null" >
+        repairMan = #{record.repairman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=INTEGER},
+      </if>
+      <if test="record.warrantytime != null" >
+        warrantyTime = #{record.warrantytime,jdbcType=INTEGER},
+      </if>
+      <if test="record.timeofreturn != null" >
+        timeOfReturn = #{record.timeofreturn,jdbcType=DATE},
+      </if>
+      <if test="record.returnstatus != null" >
+        returnStatus = #{record.returnstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        Remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update devicerepair
+    set id = #{record.id,jdbcType=BIGINT},
+      applyTime = #{record.applytime,jdbcType=DATE},
+      applicant = #{record.applicant,jdbcType=VARCHAR},
+      assetCoding = #{record.assetcoding,jdbcType=VARCHAR},
+      deviceName = #{record.devicename,jdbcType=VARCHAR},
+      deviceModel = #{record.devicemodel,jdbcType=VARCHAR},
+      repairMan = #{record.repairman,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=INTEGER},
+      warrantyTime = #{record.warrantytime,jdbcType=INTEGER},
+      timeOfReturn = #{record.timeofreturn,jdbcType=DATE},
+      returnStatus = #{record.returnstatus,jdbcType=VARCHAR},
+      Remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Devicerepair" >
+    update devicerepair
+    <set >
+      <if test="applytime != null" >
+        applyTime = #{applytime,jdbcType=DATE},
+      </if>
+      <if test="applicant != null" >
+        applicant = #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="assetcoding != null" >
+        assetCoding = #{assetcoding,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        deviceName = #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="devicemodel != null" >
+        deviceModel = #{devicemodel,jdbcType=VARCHAR},
+      </if>
+      <if test="repairman != null" >
+        repairMan = #{repairman,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="warrantytime != null" >
+        warrantyTime = #{warrantytime,jdbcType=INTEGER},
+      </if>
+      <if test="timeofreturn != null" >
+        timeOfReturn = #{timeofreturn,jdbcType=DATE},
+      </if>
+      <if test="returnstatus != null" >
+        returnStatus = #{returnstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        Remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Devicerepair" >
+    update devicerepair
+    set applyTime = #{applytime,jdbcType=DATE},
+      applicant = #{applicant,jdbcType=VARCHAR},
+      assetCoding = #{assetcoding,jdbcType=VARCHAR},
+      deviceName = #{devicename,jdbcType=VARCHAR},
+      deviceModel = #{devicemodel,jdbcType=VARCHAR},
+      repairMan = #{repairman,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=INTEGER},
+      warrantyTime = #{warrantytime,jdbcType=INTEGER},
+      timeOfReturn = #{timeofreturn,jdbcType=DATE},
+      returnStatus = #{returnstatus,jdbcType=VARCHAR},
+      Remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

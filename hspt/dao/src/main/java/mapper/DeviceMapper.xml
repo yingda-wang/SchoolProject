@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Device" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="sbid" property="sbid" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="zname" property="zname" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+    <result column="cardName" property="cardname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, sbid, name, zname, brand, model, number, position, state, cname, text, cardName
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.DeviceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from device
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from device
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.DeviceExample" >
+    delete from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Device" >
+    insert into device (id, sbid, name, 
+      zname, brand, model, 
+      number, position, state, 
+      cname, text, cardName
+      )
+    values (#{id,jdbcType=BIGINT}, #{sbid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{zname,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{position,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{cname,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, #{cardname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Device" >
+    insert into device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sbid != null" >
+        sbid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="zname != null" >
+        zname,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="text != null" >
+        text,
+      </if>
+      <if test="cardname != null" >
+        cardName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="sbid != null" >
+        #{sbid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="zname != null" >
+        #{zname,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="cardname != null" >
+        #{cardname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.DeviceExample" resultType="java.lang.Integer" >
+    select count(*) from device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update device
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.sbid != null" >
+        sbid = #{record.sbid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zname != null" >
+        zname = #{record.zname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null" >
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cname != null" >
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.text != null" >
+        text = #{record.text,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardname != null" >
+        cardName = #{record.cardname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update device
+    set id = #{record.id,jdbcType=BIGINT},
+      sbid = #{record.sbid,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      zname = #{record.zname,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      position = #{record.position,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      text = #{record.text,jdbcType=VARCHAR},
+      cardName = #{record.cardname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Device" >
+    update device
+    <set >
+      <if test="sbid != null" >
+        sbid = #{sbid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="zname != null" >
+        zname = #{zname,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="cardname != null" >
+        cardName = #{cardname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Device" >
+    update device
+    set sbid = #{sbid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      zname = #{zname,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      position = #{position,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      cname = #{cname,jdbcType=VARCHAR},
+      text = #{text,jdbcType=VARCHAR},
+      cardName = #{cardname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getBhListNoBf" resultType="pojo.Device">
+  		select sbid from device where state != '报废'
+  </select>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.GstudentMapper" >
+	<insert id="gstudentAdd" parameterType="pojo.Gstudent">
+		insert into gstudent(name,grade,major,phone,entryTime,leaveTime,id)values(#{name},#{grade},#{major},#{phone},#{entryTime},#{leaveTime},#{id})
+	</insert>
+	<select id="gstudentSearch" resultType="pojo.Gstudent">
+		SELECT * FROM gstudent
+	</select>
+	<select id="getgstudentLike" parameterType="String" resultType="user.UserInfoLike" >
+		SELECT * FROM gstudent WHERE gstudent.name like  CONCAT('%', #{searchName}, '%')
+	</select>
+	<delete id="delgstudent" parameterType="int" >
+	  DELETE FROM gstudent WHERE id=#{id}
+	</delete>
+</mapper>

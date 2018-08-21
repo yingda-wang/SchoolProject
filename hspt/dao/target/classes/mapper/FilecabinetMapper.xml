@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.FilecabinetMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Filecabinet" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="principal" property="principal" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="stay" property="stay" jdbcType="INTEGER" />
+    <result column="ifSpare" property="ifspare" jdbcType="VARCHAR" />
+    <result column="floor" property="floor" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="usage" property="usage" jdbcType="VARCHAR" />
+    <result column="zid" property="zid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, code, principal, type, number, stay, ifSpare, floor, position, usage, zid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.FilecabinetExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from filecabinet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from filecabinet
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from filecabinet
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.FilecabinetExample" >
+    delete from filecabinet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Filecabinet" >
+    insert into filecabinet (id, code, principal, 
+      type, number, stay, 
+      ifSpare, floor, position, 
+      usage, zid)
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{principal,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{stay,jdbcType=INTEGER}, 
+      #{ifspare,jdbcType=VARCHAR}, #{floor,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{usage,jdbcType=VARCHAR}, #{zid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Filecabinet" >
+    insert into filecabinet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="stay != null" >
+        stay,
+      </if>
+      <if test="ifspare != null" >
+        ifSpare,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="usage != null" >
+        usage,
+      </if>
+      <if test="zid != null" >
+        zid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="stay != null" >
+        #{stay,jdbcType=INTEGER},
+      </if>
+      <if test="ifspare != null" >
+        #{ifspare,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="usage != null" >
+        #{usage,jdbcType=VARCHAR},
+      </if>
+      <if test="zid != null" >
+        #{zid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.FilecabinetExample" resultType="java.lang.Integer" >
+    select count(*) from filecabinet
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update filecabinet
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principal != null" >
+        principal = #{record.principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.stay != null" >
+        stay = #{record.stay,jdbcType=INTEGER},
+      </if>
+      <if test="record.ifspare != null" >
+        ifSpare = #{record.ifspare,jdbcType=VARCHAR},
+      </if>
+      <if test="record.floor != null" >
+        floor = #{record.floor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usage != null" >
+        usage = #{record.usage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zid != null" >
+        zid = #{record.zid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update filecabinet
+    set id = #{record.id,jdbcType=BIGINT},
+      code = #{record.code,jdbcType=VARCHAR},
+      principal = #{record.principal,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      stay = #{record.stay,jdbcType=INTEGER},
+      ifSpare = #{record.ifspare,jdbcType=VARCHAR},
+      floor = #{record.floor,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      usage = #{record.usage,jdbcType=VARCHAR},
+      zid = #{record.zid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Filecabinet" >
+    update filecabinet
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="stay != null" >
+        stay = #{stay,jdbcType=INTEGER},
+      </if>
+      <if test="ifspare != null" >
+        ifSpare = #{ifspare,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="usage != null" >
+        usage = #{usage,jdbcType=VARCHAR},
+      </if>
+      <if test="zid != null" >
+        zid = #{zid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Filecabinet" >
+    update filecabinet
+    set code = #{code,jdbcType=VARCHAR},
+      principal = #{principal,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      stay = #{stay,jdbcType=INTEGER},
+      ifSpare = #{ifspare,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      usage = #{usage,jdbcType=VARCHAR},
+      zid = #{zid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

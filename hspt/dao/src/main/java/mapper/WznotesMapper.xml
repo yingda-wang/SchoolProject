@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.WznotesMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Wznotes" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="wzId" property="wzid" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="updateTime" property="updatetime" jdbcType="DATE" />
+    <result column="zid" property="zid" jdbcType="INTEGER" />
+    <result column="person" property="person" jdbcType="INTEGER" />
+    <result column="ifYes" property="ifyes" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="dId" property="did" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, wzId, number, updateTime, zid, person, ifYes, name, price, dId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.WznotesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wznotes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from wznotes
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from wznotes
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.WznotesExample" >
+    delete from wznotes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Wznotes" >
+    insert into wznotes (id, wzId, number, 
+      updateTime, zid, person, 
+      ifYes, name, price, 
+      dId)
+    values (#{id,jdbcType=BIGINT}, #{wzid,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{updatetime,jdbcType=DATE}, #{zid,jdbcType=INTEGER}, #{person,jdbcType=INTEGER}, 
+      #{ifyes,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{did,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Wznotes" >
+    insert into wznotes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="wzid != null" >
+        wzId,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+      <if test="zid != null" >
+        zid,
+      </if>
+      <if test="person != null" >
+        person,
+      </if>
+      <if test="ifyes != null" >
+        ifYes,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="did != null" >
+        dId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wzid != null" >
+        #{wzid,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="zid != null" >
+        #{zid,jdbcType=INTEGER},
+      </if>
+      <if test="person != null" >
+        #{person,jdbcType=INTEGER},
+      </if>
+      <if test="ifyes != null" >
+        #{ifyes,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="did != null" >
+        #{did,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.WznotesExample" resultType="java.lang.Integer" >
+    select count(*) from wznotes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wznotes
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.wzid != null" >
+        wzId = #{record.wzid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatetime != null" >
+        updateTime = #{record.updatetime,jdbcType=DATE},
+      </if>
+      <if test="record.zid != null" >
+        zid = #{record.zid,jdbcType=INTEGER},
+      </if>
+      <if test="record.person != null" >
+        person = #{record.person,jdbcType=INTEGER},
+      </if>
+      <if test="record.ifyes != null" >
+        ifYes = #{record.ifyes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.did != null" >
+        dId = #{record.did,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wznotes
+    set id = #{record.id,jdbcType=BIGINT},
+      wzId = #{record.wzid,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      updateTime = #{record.updatetime,jdbcType=DATE},
+      zid = #{record.zid,jdbcType=INTEGER},
+      person = #{record.person,jdbcType=INTEGER},
+      ifYes = #{record.ifyes,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE},
+      dId = #{record.did,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Wznotes" >
+    update wznotes
+    <set >
+      <if test="wzid != null" >
+        wzId = #{wzid,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=DATE},
+      </if>
+      <if test="zid != null" >
+        zid = #{zid,jdbcType=INTEGER},
+      </if>
+      <if test="person != null" >
+        person = #{person,jdbcType=INTEGER},
+      </if>
+      <if test="ifyes != null" >
+        ifYes = #{ifyes,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="did != null" >
+        dId = #{did,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Wznotes" >
+    update wznotes
+    set wzId = #{wzid,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=DATE},
+      zid = #{zid,jdbcType=INTEGER},
+      person = #{person,jdbcType=INTEGER},
+      ifYes = #{ifyes,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      dId = #{did,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

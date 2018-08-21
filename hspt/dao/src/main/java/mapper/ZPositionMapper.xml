@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.ZPositionMapper">
+<select id="getZPosition" resultType="user.ZPosition1">
+ SELECT z.id AS zid,z.zName,p.id ,p.position FROM zu z , POSITION p WHERE z.id = p.zId
+</select >
+<insert id="addZPosition" parameterType="user.ZPosition1">
+INSERT INTO `jdyy`.`position`(`id`,`position`,`zId`) VALUES ( '#{id}','#{position}','#{zid}')
+</insert>
+ <select id="getZu" resultType="user.zu">
+		SELECT * FROM zu
+	</select>
+	<select id="getZu1" resultType="user.zu">
+		SELECT * FROM zu
+	</select>
+	<select id="getPosition" resultType="user.position">
+		SELECT * FROM position 
+	</select>  
+	<select id="getPosition1" parameterType="int" resultType="user.ZPosition1">
+		SELECT * FROM position where zId = #{zId}
+	</select>
+	<insert id="addZu1" parameterType="user.zu">
+	INSERT INTO `zu`(`zName`) VALUES (#{zName})
+	</insert>
+	<delete id="del" parameterType="int">
+	delete from position where id=#{id}
+	</delete>
+	<insert id= "addPosition1" parameterType="user.position">
+	INSERT INTO `jdyy`.`position`(`position`,`zId`) VALUES ( #{position},#{zId})
+	
+	</insert>
+	<select id="getZPositionLike" parameterType="String" resultType="user.ZPosition1" >
+		 SELECT z.id AS zid,z.zName,p.id ,p.position FROM zu z , POSITION p WHERE z.id = p.zId and p.position like CONCAT('%',#{searchName},'%') 
+	</select>
+		<delete id="del1" parameterType="int">
+	delete from zu where id=#{id}
+	</delete>
+</mapper>

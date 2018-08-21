@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.AttendancerecordsMapper" >
+	<insert id="attendancerecordsAdd" parameterType="ksxs.Attendancerecords">
+		insert into attendancerecords(id,time,meetingName,place,schedule,data,ppt,vedio,recording)values(#{id},#{time},#{meetingName},#{place},#{schedule},#{data},#{ppt},#{vedio},#{recording})
+	</insert>
+	<select id="attendancerecordsSearch" resultType="ksxs.Attendancerecords">
+		SELECT * FROM attendancerecords
+	</select>
+	<select id="getattendancerecordsLike" resultType="ksxs.Attendancerecords">
+		SELECT * FROM attendancerecords WHERE attendancerecords.time like  CONCAT('%', #{searchName}, '%')
+	</select>
+	
+	<delete id="delattendancerecords" parameterType="int" >
+	  DELETE FROM attendancerecords WHERE id=#{id}
+	</delete>
+</mapper>

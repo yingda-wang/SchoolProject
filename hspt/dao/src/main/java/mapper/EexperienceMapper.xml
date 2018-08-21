@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mapper.EexperienceMapper">
+
+	<insert id="eexperience_ADD" parameterType="pojo.Eexperience">
+
+		insert into
+		eexperience(id,workAddress,classes,technicalText,photo)
+		values(#{id},#{workAddress},#{classes},#{technicalText},#{photo})
+	</insert>
+
+	<select id="eexperience_SELECTALL" resultType="pojo.Eexperience">
+		SELECT * from eexperience
+	</select>
+	
+    <select id="geteexperienceInfo" resultType="pojo.Eexperience">
+		SELECT * FROM eexperience
+	</select>
+	<select id="geteexperienceInfoLike" parameterType="String" resultType="pojo.Eexperience" >
+		SELECT * FROM eexperience WHERE eexperience.id  like  CONCAT('%', #{id}, '%')
+		
+	</select>
+	<delete id="deleexperienceInfo" parameterType="int" >
+	  DELETE FROM eexperience WHERE id=#{eId}
+	</delete>
+    
+    <update id="updateeexperience" parameterType="pojo.Eexperience">
+    UPDATE eexperience SET workAddress=#{workAddress},classes=#{classes},technicalText=#{technicalText},photo=#{photo} WHERE eId=#{eId}
+    </update>
+  
+    
+</mapper>  

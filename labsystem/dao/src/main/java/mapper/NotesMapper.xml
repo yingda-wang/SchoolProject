@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.NotesMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Notes" >
+    <id column="id1" property="id1" jdbcType="BIGINT" />
+    <result column="roomCode" property="roomcode" jdbcType="VARCHAR" />
+    <result column="student" property="student" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="nf" property="nf" jdbcType="VARCHAR" />
+    <result column="kcm" property="kcm" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="str" property="str" jdbcType="VARCHAR" />
+    <result column="kcbh" property="kcbh" jdbcType="VARCHAR" />
+    <result column="xuehao" property="xuehao" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id1, roomCode, student, id, name, nf, kcm, username, str, kcbh, xuehao
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.NotesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from notes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from notes
+    where id1 = #{id1,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from notes
+    where id1 = #{id1,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.NotesExample" >
+    delete from notes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Notes" >
+    insert into notes (id1, roomCode, student, 
+      id, name, nf, kcm, 
+      username, str, kcbh, 
+      xuehao)
+    values (#{id1,jdbcType=BIGINT}, #{roomcode,jdbcType=VARCHAR}, #{student,jdbcType=VARCHAR}, 
+      #{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{nf,jdbcType=VARCHAR}, #{kcm,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{str,jdbcType=VARCHAR}, #{kcbh,jdbcType=VARCHAR}, 
+      #{xuehao,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Notes" >
+    insert into notes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id1 != null" >
+        id1,
+      </if>
+      <if test="roomcode != null" >
+        roomCode,
+      </if>
+      <if test="student != null" >
+        student,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="nf != null" >
+        nf,
+      </if>
+      <if test="kcm != null" >
+        kcm,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="str != null" >
+        str,
+      </if>
+      <if test="kcbh != null" >
+        kcbh,
+      </if>
+      <if test="xuehao != null" >
+        xuehao,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id1 != null" >
+        #{id1,jdbcType=BIGINT},
+      </if>
+      <if test="roomcode != null" >
+        #{roomcode,jdbcType=VARCHAR},
+      </if>
+      <if test="student != null" >
+        #{student,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nf != null" >
+        #{nf,jdbcType=VARCHAR},
+      </if>
+      <if test="kcm != null" >
+        #{kcm,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="str != null" >
+        #{str,jdbcType=VARCHAR},
+      </if>
+      <if test="kcbh != null" >
+        #{kcbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xuehao != null" >
+        #{xuehao,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.NotesExample" resultType="java.lang.Integer" >
+    select count(*) from notes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update notes
+    <set >
+      <if test="record.id1 != null" >
+        id1 = #{record.id1,jdbcType=BIGINT},
+      </if>
+      <if test="record.roomcode != null" >
+        roomCode = #{record.roomcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.student != null" >
+        student = #{record.student,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nf != null" >
+        nf = #{record.nf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kcm != null" >
+        kcm = #{record.kcm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.str != null" >
+        str = #{record.str,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kcbh != null" >
+        kcbh = #{record.kcbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xuehao != null" >
+        xuehao = #{record.xuehao,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update notes
+    set id1 = #{record.id1,jdbcType=BIGINT},
+      roomCode = #{record.roomcode,jdbcType=VARCHAR},
+      student = #{record.student,jdbcType=VARCHAR},
+      id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      nf = #{record.nf,jdbcType=VARCHAR},
+      kcm = #{record.kcm,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      str = #{record.str,jdbcType=VARCHAR},
+      kcbh = #{record.kcbh,jdbcType=VARCHAR},
+      xuehao = #{record.xuehao,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Notes" >
+    update notes
+    <set >
+      <if test="roomcode != null" >
+        roomCode = #{roomcode,jdbcType=VARCHAR},
+      </if>
+      <if test="student != null" >
+        student = #{student,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="nf != null" >
+        nf = #{nf,jdbcType=VARCHAR},
+      </if>
+      <if test="kcm != null" >
+        kcm = #{kcm,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="str != null" >
+        str = #{str,jdbcType=VARCHAR},
+      </if>
+      <if test="kcbh != null" >
+        kcbh = #{kcbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xuehao != null" >
+        xuehao = #{xuehao,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id1 = #{id1,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Notes" >
+    update notes
+    set roomCode = #{roomcode,jdbcType=VARCHAR},
+      student = #{student,jdbcType=VARCHAR},
+      id = #{id,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      nf = #{nf,jdbcType=VARCHAR},
+      kcm = #{kcm,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      str = #{str,jdbcType=VARCHAR},
+      kcbh = #{kcbh,jdbcType=VARCHAR},
+      xuehao = #{xuehao,jdbcType=VARCHAR}
+    where id1 = #{id1,jdbcType=BIGINT}
+  </update>
+  <select id="selectNotes" parameterType="pojo.Notes" resultType="pojo.Notes">
+  	SELECT distinct* FROM notes WHERE kcm=#{ kcm} AND nf=#{ nf} AND roomcode=#{ roomcode} 
+  </select>
+  <select id="selectNotes1" parameterType="pojo.Notes" resultType="pojo.Notes">
+  	SELECT distinct* FROM notes WHERE  nf=#{ nf} AND roomcode=#{ roomcode} 
+  </select>
+   <select id="selectNotes2" parameterType="pojo.Notes" resultType="pojo.Notes">
+  		SELECT DISTINCT id,NAME,kcm,str FROM notes  WHERE  nf=#{ nf} AND roomcode=#{ roomcode} 
+  </select>
+  
+</mapper>

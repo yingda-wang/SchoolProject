@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.presentMapper" >
+<select id="selectTecourse" parameterType="int" resultType="pojo.Tec">
+select * from tecourse where id=#{id}
+</select>
+<select id="selectGfile" parameterType="int" resultType="pojo.gfile">
+select * from gfile where id=#{id}
+</select>
+<select id="selectEexperience" parameterType="int" resultType="pojo.Eexperience">
+select * from eexperience  where id=#{id}
+</select> 
+<select id="selectFwork" parameterType="int" resultType="pojo.Fwork">
+select * from fwork  where id=#{id}
+</select>
+<select id="selectAward" parameterType="int" resultType="pojo.Award">
+select * from award   where id=#{id}
+</select>
+<select id="selectWexperience" parameterType="int" resultType="pojo.Wexperience">
+select * from wexperience  where id=#{id}
+</select>
+</mapper>

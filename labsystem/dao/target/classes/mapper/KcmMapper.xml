@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.KcmMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Kcm" >
+    <result column="kcm" property="kcm" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="kcbh" property="kcbh" jdbcType="VARCHAR" />
+    <result column="xueshi" property="xueshi" jdbcType="VARCHAR" />
+    <result column="xingzhi" property="xingzhi" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    kcm, version, kcbh, xueshi, xingzhi
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.KcmExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from kcm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="pojo.KcmExample" >
+    delete from kcm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Kcm" >
+    insert into kcm (kcm, version, kcbh, 
+      xueshi, xingzhi)
+    values (#{kcm,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{kcbh,jdbcType=VARCHAR}, 
+      #{xueshi,jdbcType=VARCHAR}, #{xingzhi,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Kcm" >
+    insert into kcm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="kcm != null" >
+        kcm,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="kcbh != null" >
+        kcbh,
+      </if>
+      <if test="xueshi != null" >
+        xueshi,
+      </if>
+      <if test="xingzhi != null" >
+        xingzhi,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="kcm != null" >
+        #{kcm,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="kcbh != null" >
+        #{kcbh,jdbcType=VARCHAR},
+      </if>
+      <if test="xueshi != null" >
+        #{xueshi,jdbcType=VARCHAR},
+      </if>
+      <if test="xingzhi != null" >
+        #{xingzhi,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.KcmExample" resultType="java.lang.Integer" >
+    select count(*) from kcm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update kcm
+    <set >
+      <if test="record.kcm != null" >
+        kcm = #{record.kcm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kcbh != null" >
+        kcbh = #{record.kcbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xueshi != null" >
+        xueshi = #{record.xueshi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xingzhi != null" >
+        xingzhi = #{record.xingzhi,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update kcm
+    set kcm = #{record.kcm,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      kcbh = #{record.kcbh,jdbcType=VARCHAR},
+      xueshi = #{record.xueshi,jdbcType=VARCHAR},
+      xingzhi = #{record.xingzhi,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectKcm" resultType="pojo.Kcm">
+   SELECT DISTINCT * FROM  kcm 
+  </select>
+  
+</mapper>

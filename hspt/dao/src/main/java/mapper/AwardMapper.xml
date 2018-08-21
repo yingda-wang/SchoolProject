@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mapper.AwardMapper">
+
+	<insert id="award_ADD" parameterType="pojo.Award">
+
+		insert into
+		award(id,type,name,grade,rank,time)
+		values(#{id},#{type},#{name},#{grade},#{rank},#{time})
+	</insert>
+
+	<select id="award_SELECTALL" resultType="pojo.Award">
+		SELECT * from award
+	</select>
+	
+    <select id="getawardInfo" resultType="pojo.Award" parameterType="int">
+		SELECT * FROM award where award.id=#{id}
+	</select>
+	
+	 <select id="getawardInfoS" resultType="pojo.Award" >
+		SELECT * FROM award 
+	</select>
+	
+	<select id="getawardInfoLike" parameterType="String" resultType="pojo.Award" >
+		SELECT * FROM award WHERE award.id  like  CONCAT('%', #{id}, '%')
+		
+	</select>	
+	<delete id="delawardInfo" parameterType="int" >
+	  DELETE FROM award WHERE gId=#{id}
+	</delete>
+    
+    <update id="updateaward" parameterType="pojo.Award">
+    UPDATE award SET type=#{type},name=#{name},grade=#{grade},rank=#{rank},time=#{time} WHERE id=#{id}
+    </update>
+  
+    
+</mapper>  

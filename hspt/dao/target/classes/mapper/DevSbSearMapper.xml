@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DevSbSearMapper" >
+	<select id="getSb" resultType="pojo.DevSbSear">
+	SELECT a.id,a.applyTime AS applytime,a.deviceCoding AS devicecoding,a.deviceName AS devicename,a.Manager AS manager,a.number,a.scrapApplicants AS scrapapplicants,a.Specification AS specification,a.usedPostion AS usedpostion,a.zid,b.name AS zname FROM devicescrappedapplyregist a,zu b WHERE a.zid=b.id	</select>
+	
+	</mapper>

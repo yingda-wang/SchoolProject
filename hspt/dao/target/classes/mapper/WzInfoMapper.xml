@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.WzInfoMapper">
+
+	<select id="getType" resultType="wz.WzType">
+		SELECT * FROM wztype,wzcat WHERE wztype.tId=wzcat.id
+	</select>
+	
+	<select id="getWz" resultType="wz.WzType"  parameterType="int">
+		SELECT * FROM wztype WHERE wztype.tId=#{tId}
+	</select>
+	
+	<insert id="setWzApply" parameterType="wz.WzInfo">
+		insert into wzapply (wzId,number,applyTime,zId,ifYes,person) values (#{wzId},#{number},#{applyTime},#{zId},#{ifYes},#{person})
+	</insert>
+	
+	<select id="getWzApplyInfo" resultType="wz.WzInfo">
+		SELECT * FROM wzapply,wztype,wzcat WHERE wzapply.wzId = wztype.wzId AND wztype.tId = wzcat.id
+	</select>
+	
+	<select id="getPosition" parameterType="int" resultType="wz.WzInfo">
+		SELECT * FROM position where dId = #{dId}
+	</select>
+	
+	<update id="updateWzApplyInfo" parameterType="wz.WzInfo" >
+	update wzapply set 
+	name=#{name},number=#{number},arriveTime=#{arriveTime},dId=#{dId}
+	where id=#{id}
+	</update>
+	
+	<delete id="delWzApplyInfo" parameterType="int" >
+	  DELETE FROM wzapply WHERE id=#{id}
+	</delete>
+	
+	<update id="updateIfYes" parameterType="wz.WzIfYes" >
+	 UPDATE wzapply SET ifYes= #{ifYes} where id=#{id}
+	</update>
+	
+	<insert id="setIfYes" parameterType="int">
+		UPDATE wzapply SET ifYes= '批准' where id=#{id}
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="wz.WzApply" >
+    update wzapply
+    set ifYes = '是' where id = #{id}
+  	</update>
+  
+  	<insert id="setWzNotes" parameterType="wz.WzApply">
+  		insert into wzNotes (name,number,dId,updateTime) values (#{name},#{number},#{dId},#{updateTime})
+  	</insert>
+	
+	<insert id="addWz" parameterType="wz.WzType">
+  		insert into wztype (wzId,name,tId,price) values (#{wzId},#{name},#{tId},#{price})
+  	</insert>
+  	
+  	<insert id="addWzType" parameterType="String">
+  		insert into wzcat (type) values (#{type})
+  	</insert>
+  	
+  	<select id="getWzType" resultType="wz.WzType">
+		SELECT * FROM wztype
+	</select>
+	
+	<select id="getWzTypeType" resultType="wz.WzType">
+		SELECT * FROM wzcat
+	</select>
+  	
+	<select id="getWzNotesInfo" resultType="wz.WzApply">
+		SELECT * FROM wznotes,wzcat WHERE wznotes.dId=wzcat.id
+	</select>
+	
+	<select id="getList" resultType="wz.WzApply">
+		SELECT * FROM wzapply,wzcat WHERE wzapply.id=#{searchName};
+	</select>
+	
+	<select id="getWzInfoLike" parameterType="String" resultType="wz.WzApply" >
+	SELECT * FROM wzapply,wztype,wzcat WHERE wzapply.wzId = wztype.wzId AND wztype.tId = wzcat.id
+  AND wztype.name like CONCAT(CONCAT('%',#{searchName}),'%')
+	</select>
+	
+	<select id="getWzTypeLike" parameterType="String" resultType="wz.WzType" >
+		SELECT * FROM wzapply,wztype,wzcat WHERE wzapply.wzId = wztype.wzId AND wztype.tId = wzcat.id
+and wztype.name like  CONCAT('%', #{searchName}, '%')
+	</select>
+	
+	<update id="upDateWzInfo" parameterType="wz.WzType" >
+    update wztype set del = #{del} where wzId = #{id}
+  	</update>
+	
+</mapper>

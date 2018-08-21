@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.Xsb1Mapper" >
+  <resultMap id="BaseResultMap" type="pojo.Xsb1" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="kcbh" property="kcbh" jdbcType="VARCHAR" />
+    <result column="kcm" property="kcm" jdbcType="VARCHAR" />
+    <result column="jobnumber" property="jobnumber" jdbcType="VARCHAR" />
+    <result column="student" property="student" jdbcType="VARCHAR" />
+    <result column="xuehao" property="xuehao" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, kcbh, kcm, jobnumber, student, xuehao, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.Xsb1Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xsb1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from xsb1
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from xsb1
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.Xsb1Example" >
+    delete from xsb1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Xsb1" >
+    insert into xsb1 (id, kcbh, kcm, 
+      jobnumber, student, xuehao, 
+      state)
+    values (#{id,jdbcType=BIGINT}, #{kcbh,jdbcType=VARCHAR}, #{kcm,jdbcType=VARCHAR}, 
+      #{jobnumber,jdbcType=VARCHAR}, #{student,jdbcType=VARCHAR}, #{xuehao,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Xsb1" >
+    insert into xsb1
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="kcbh != null" >
+        kcbh,
+      </if>
+      <if test="kcm != null" >
+        kcm,
+      </if>
+      <if test="jobnumber != null" >
+        jobnumber,
+      </if>
+      <if test="student != null" >
+        student,
+      </if>
+      <if test="xuehao != null" >
+        xuehao,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="kcbh != null" >
+        #{kcbh,jdbcType=VARCHAR},
+      </if>
+      <if test="kcm != null" >
+        #{kcm,jdbcType=VARCHAR},
+      </if>
+      <if test="jobnumber != null" >
+        #{jobnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="student != null" >
+        #{student,jdbcType=VARCHAR},
+      </if>
+      <if test="xuehao != null" >
+        #{xuehao,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.Xsb1Example" resultType="java.lang.Integer" >
+    select count(*) from xsb1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update xsb1
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.kcbh != null" >
+        kcbh = #{record.kcbh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kcm != null" >
+        kcm = #{record.kcm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobnumber != null" >
+        jobnumber = #{record.jobnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.student != null" >
+        student = #{record.student,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xuehao != null" >
+        xuehao = #{record.xuehao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update xsb1
+    set id = #{record.id,jdbcType=BIGINT},
+      kcbh = #{record.kcbh,jdbcType=VARCHAR},
+      kcm = #{record.kcm,jdbcType=VARCHAR},
+      jobnumber = #{record.jobnumber,jdbcType=VARCHAR},
+      student = #{record.student,jdbcType=VARCHAR},
+      xuehao = #{record.xuehao,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Xsb1" >
+    update xsb1
+    <set >
+      <if test="kcbh != null" >
+        kcbh = #{kcbh,jdbcType=VARCHAR},
+      </if>
+      <if test="kcm != null" >
+        kcm = #{kcm,jdbcType=VARCHAR},
+      </if>
+      <if test="jobnumber != null" >
+        jobnumber = #{jobnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="student != null" >
+        student = #{student,jdbcType=VARCHAR},
+      </if>
+      <if test="xuehao != null" >
+        xuehao = #{xuehao,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Xsb1" >
+    update xsb1
+    set kcbh = #{kcbh,jdbcType=VARCHAR},
+      kcm = #{kcm,jdbcType=VARCHAR},
+      jobnumber = #{jobnumber,jdbcType=VARCHAR},
+      student = #{student,jdbcType=VARCHAR},
+      xuehao = #{xuehao,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.AssetstransferstatisticsMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Assetstransferstatistics" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="deviceCoding" property="devicecoding" jdbcType="VARCHAR" />
+    <result column="deviceName" property="devicename" jdbcType="VARCHAR" />
+    <result column="Specification" property="specification" jdbcType="VARCHAR" />
+    <result column="Number" property="number" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="sum" property="sum" jdbcType="DOUBLE" />
+    <result column="purchaseDate" property="purchasedate" jdbcType="DATE" />
+    <result column="elapsedLife" property="elapsedlife" jdbcType="VARCHAR" />
+    <result column="depHaBeMade" property="dephabemade" jdbcType="VARCHAR" />
+    <result column="accountCategory" property="accountcategory" jdbcType="VARCHAR" />
+    <result column="transferDepartment" property="transferdepartment" jdbcType="VARCHAR" />
+    <result column="transferToDepartment" property="transfertodepartment" jdbcType="VARCHAR" />
+    <result column="applyTime" property="applytime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, deviceCoding, deviceName, Specification, Number, price, sum, purchaseDate, elapsedLife, 
+    depHaBeMade, accountCategory, transferDepartment, transferToDepartment, applyTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.AssetstransferstatisticsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from assetstransferstatistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from assetstransferstatistics
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from assetstransferstatistics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.AssetstransferstatisticsExample" >
+    delete from assetstransferstatistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Assetstransferstatistics" >
+    insert into assetstransferstatistics (id, deviceCoding, deviceName, 
+      Specification, Number, price, 
+      sum, purchaseDate, elapsedLife, 
+      depHaBeMade, accountCategory, transferDepartment, 
+      transferToDepartment, applyTime)
+    values (#{id,jdbcType=BIGINT}, #{devicecoding,jdbcType=VARCHAR}, #{devicename,jdbcType=VARCHAR}, 
+      #{specification,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{price,jdbcType=DOUBLE}, 
+      #{sum,jdbcType=DOUBLE}, #{purchasedate,jdbcType=DATE}, #{elapsedlife,jdbcType=VARCHAR}, 
+      #{dephabemade,jdbcType=VARCHAR}, #{accountcategory,jdbcType=VARCHAR}, #{transferdepartment,jdbcType=VARCHAR}, 
+      #{transfertodepartment,jdbcType=VARCHAR}, #{applytime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Assetstransferstatistics" >
+    insert into assetstransferstatistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="devicecoding != null" >
+        deviceCoding,
+      </if>
+      <if test="devicename != null" >
+        deviceName,
+      </if>
+      <if test="specification != null" >
+        Specification,
+      </if>
+      <if test="number != null" >
+        Number,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="sum != null" >
+        sum,
+      </if>
+      <if test="purchasedate != null" >
+        purchaseDate,
+      </if>
+      <if test="elapsedlife != null" >
+        elapsedLife,
+      </if>
+      <if test="dephabemade != null" >
+        depHaBeMade,
+      </if>
+      <if test="accountcategory != null" >
+        accountCategory,
+      </if>
+      <if test="transferdepartment != null" >
+        transferDepartment,
+      </if>
+      <if test="transfertodepartment != null" >
+        transferToDepartment,
+      </if>
+      <if test="applytime != null" >
+        applyTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="devicecoding != null" >
+        #{devicecoding,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="sum != null" >
+        #{sum,jdbcType=DOUBLE},
+      </if>
+      <if test="purchasedate != null" >
+        #{purchasedate,jdbcType=DATE},
+      </if>
+      <if test="elapsedlife != null" >
+        #{elapsedlife,jdbcType=VARCHAR},
+      </if>
+      <if test="dephabemade != null" >
+        #{dephabemade,jdbcType=VARCHAR},
+      </if>
+      <if test="accountcategory != null" >
+        #{accountcategory,jdbcType=VARCHAR},
+      </if>
+      <if test="transferdepartment != null" >
+        #{transferdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="transfertodepartment != null" >
+        #{transfertodepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null" >
+        #{applytime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.AssetstransferstatisticsExample" resultType="java.lang.Integer" >
+    select count(*) from assetstransferstatistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update assetstransferstatistics
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.devicecoding != null" >
+        deviceCoding = #{record.devicecoding,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicename != null" >
+        deviceName = #{record.devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specification != null" >
+        Specification = #{record.specification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        Number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sum != null" >
+        sum = #{record.sum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.purchasedate != null" >
+        purchaseDate = #{record.purchasedate,jdbcType=DATE},
+      </if>
+      <if test="record.elapsedlife != null" >
+        elapsedLife = #{record.elapsedlife,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dephabemade != null" >
+        depHaBeMade = #{record.dephabemade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountcategory != null" >
+        accountCategory = #{record.accountcategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transferdepartment != null" >
+        transferDepartment = #{record.transferdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transfertodepartment != null" >
+        transferToDepartment = #{record.transfertodepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applytime != null" >
+        applyTime = #{record.applytime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update assetstransferstatistics
+    set id = #{record.id,jdbcType=BIGINT},
+      deviceCoding = #{record.devicecoding,jdbcType=VARCHAR},
+      deviceName = #{record.devicename,jdbcType=VARCHAR},
+      Specification = #{record.specification,jdbcType=VARCHAR},
+      Number = #{record.number,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DOUBLE},
+      sum = #{record.sum,jdbcType=DOUBLE},
+      purchaseDate = #{record.purchasedate,jdbcType=DATE},
+      elapsedLife = #{record.elapsedlife,jdbcType=VARCHAR},
+      depHaBeMade = #{record.dephabemade,jdbcType=VARCHAR},
+      accountCategory = #{record.accountcategory,jdbcType=VARCHAR},
+      transferDepartment = #{record.transferdepartment,jdbcType=VARCHAR},
+      transferToDepartment = #{record.transfertodepartment,jdbcType=VARCHAR},
+      applyTime = #{record.applytime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Assetstransferstatistics" >
+    update assetstransferstatistics
+    <set >
+      <if test="devicecoding != null" >
+        deviceCoding = #{devicecoding,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        deviceName = #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        Specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        Number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="sum != null" >
+        sum = #{sum,jdbcType=DOUBLE},
+      </if>
+      <if test="purchasedate != null" >
+        purchaseDate = #{purchasedate,jdbcType=DATE},
+      </if>
+      <if test="elapsedlife != null" >
+        elapsedLife = #{elapsedlife,jdbcType=VARCHAR},
+      </if>
+      <if test="dephabemade != null" >
+        depHaBeMade = #{dephabemade,jdbcType=VARCHAR},
+      </if>
+      <if test="accountcategory != null" >
+        accountCategory = #{accountcategory,jdbcType=VARCHAR},
+      </if>
+      <if test="transferdepartment != null" >
+        transferDepartment = #{transferdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="transfertodepartment != null" >
+        transferToDepartment = #{transfertodepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="applytime != null" >
+        applyTime = #{applytime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Assetstransferstatistics" >
+    update assetstransferstatistics
+    set deviceCoding = #{devicecoding,jdbcType=VARCHAR},
+      deviceName = #{devicename,jdbcType=VARCHAR},
+      Specification = #{specification,jdbcType=VARCHAR},
+      Number = #{number,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      sum = #{sum,jdbcType=DOUBLE},
+      purchaseDate = #{purchasedate,jdbcType=DATE},
+      elapsedLife = #{elapsedlife,jdbcType=VARCHAR},
+      depHaBeMade = #{dephabemade,jdbcType=VARCHAR},
+      accountCategory = #{accountcategory,jdbcType=VARCHAR},
+      transferDepartment = #{transferdepartment,jdbcType=VARCHAR},
+      transferToDepartment = #{transfertodepartment,jdbcType=VARCHAR},
+      applyTime = #{applytime,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

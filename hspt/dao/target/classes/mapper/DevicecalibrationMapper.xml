@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DevicecalibrationMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Devicecalibration" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="exportid" property="exportid" jdbcType="VARCHAR" />
+    <result column="count" property="count" jdbcType="VARCHAR" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+    <result column="time1" property="time1" jdbcType="DATE" />
+    <result column="time2" property="time2" jdbcType="DATE" />
+    <result column="fujian" property="fujian" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, model, exportid, count, text, time1, time2, fujian
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.DevicecalibrationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from devicecalibration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from devicecalibration
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from devicecalibration
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.DevicecalibrationExample" >
+    delete from devicecalibration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Devicecalibration" >
+    insert into devicecalibration (id, model, exportid, 
+      count, text, time1, time2, 
+      fujian)
+    values (#{id,jdbcType=BIGINT}, #{model,jdbcType=VARCHAR}, #{exportid,jdbcType=VARCHAR}, 
+      #{count,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, #{time1,jdbcType=DATE}, #{time2,jdbcType=DATE}, 
+      #{fujian,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Devicecalibration" >
+    insert into devicecalibration
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="exportid != null" >
+        exportid,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="text != null" >
+        text,
+      </if>
+      <if test="time1 != null" >
+        time1,
+      </if>
+      <if test="time2 != null" >
+        time2,
+      </if>
+      <if test="fujian != null" >
+        fujian,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="exportid != null" >
+        #{exportid,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null" >
+        #{time1,jdbcType=DATE},
+      </if>
+      <if test="time2 != null" >
+        #{time2,jdbcType=DATE},
+      </if>
+      <if test="fujian != null" >
+        #{fujian,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.DevicecalibrationExample" resultType="java.lang.Integer" >
+    select count(*) from devicecalibration
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update devicecalibration
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.model != null" >
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exportid != null" >
+        exportid = #{record.exportid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.count != null" >
+        count = #{record.count,jdbcType=VARCHAR},
+      </if>
+      <if test="record.text != null" >
+        text = #{record.text,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time1 != null" >
+        time1 = #{record.time1,jdbcType=DATE},
+      </if>
+      <if test="record.time2 != null" >
+        time2 = #{record.time2,jdbcType=DATE},
+      </if>
+      <if test="record.fujian != null" >
+        fujian = #{record.fujian,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update devicecalibration
+    set id = #{record.id,jdbcType=BIGINT},
+      model = #{record.model,jdbcType=VARCHAR},
+      exportid = #{record.exportid,jdbcType=VARCHAR},
+      count = #{record.count,jdbcType=VARCHAR},
+      text = #{record.text,jdbcType=VARCHAR},
+      time1 = #{record.time1,jdbcType=DATE},
+      time2 = #{record.time2,jdbcType=DATE},
+      fujian = #{record.fujian,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Devicecalibration" >
+    update devicecalibration
+    <set >
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="exportid != null" >
+        exportid = #{exportid,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null" >
+        count = #{count,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="time1 != null" >
+        time1 = #{time1,jdbcType=DATE},
+      </if>
+      <if test="time2 != null" >
+        time2 = #{time2,jdbcType=DATE},
+      </if>
+      <if test="fujian != null" >
+        fujian = #{fujian,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Devicecalibration" >
+    update devicecalibration
+    set model = #{model,jdbcType=VARCHAR},
+      exportid = #{exportid,jdbcType=VARCHAR},
+      count = #{count,jdbcType=VARCHAR},
+      text = #{text,jdbcType=VARCHAR},
+      time1 = #{time1,jdbcType=DATE},
+      time2 = #{time2,jdbcType=DATE},
+      fujian = #{fujian,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

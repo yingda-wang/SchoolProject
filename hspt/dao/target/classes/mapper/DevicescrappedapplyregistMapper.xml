@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DevicescrappedapplyregistMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Devicescrappedapplyregist" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="deviceCoding" property="devicecoding" jdbcType="VARCHAR" />
+    <result column="deviceName" property="devicename" jdbcType="VARCHAR" />
+    <result column="Specification" property="specification" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="applyTime" property="applytime" jdbcType="DATE" />
+    <result column="zname" property="zname" jdbcType="VARCHAR" />
+    <result column="usedPostion" property="usedpostion" jdbcType="VARCHAR" />
+    <result column="scrapApplicants" property="scrapapplicants" jdbcType="VARCHAR" />
+    <result column="Manager" property="manager" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, deviceCoding, deviceName, Specification, number, applyTime, zname, usedPostion, 
+    scrapApplicants, Manager
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.DevicescrappedapplyregistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from devicescrappedapplyregist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from devicescrappedapplyregist
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from devicescrappedapplyregist
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.DevicescrappedapplyregistExample" >
+    delete from devicescrappedapplyregist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Devicescrappedapplyregist" >
+    insert into devicescrappedapplyregist (id, deviceCoding, deviceName, 
+      Specification, number, applyTime, 
+      zname, usedPostion, scrapApplicants, 
+      Manager)
+    values (#{id,jdbcType=BIGINT}, #{devicecoding,jdbcType=VARCHAR}, #{devicename,jdbcType=VARCHAR}, 
+      #{specification,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{applytime,jdbcType=DATE}, 
+      #{zname,jdbcType=VARCHAR}, #{usedpostion,jdbcType=VARCHAR}, #{scrapapplicants,jdbcType=VARCHAR}, 
+      #{manager,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Devicescrappedapplyregist" >
+    insert into devicescrappedapplyregist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="devicecoding != null" >
+        deviceCoding,
+      </if>
+      <if test="devicename != null" >
+        deviceName,
+      </if>
+      <if test="specification != null" >
+        Specification,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="applytime != null" >
+        applyTime,
+      </if>
+      <if test="zname != null" >
+        zname,
+      </if>
+      <if test="usedpostion != null" >
+        usedPostion,
+      </if>
+      <if test="scrapapplicants != null" >
+        scrapApplicants,
+      </if>
+      <if test="manager != null" >
+        Manager,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="devicecoding != null" >
+        #{devicecoding,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="applytime != null" >
+        #{applytime,jdbcType=DATE},
+      </if>
+      <if test="zname != null" >
+        #{zname,jdbcType=VARCHAR},
+      </if>
+      <if test="usedpostion != null" >
+        #{usedpostion,jdbcType=VARCHAR},
+      </if>
+      <if test="scrapapplicants != null" >
+        #{scrapapplicants,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        #{manager,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.DevicescrappedapplyregistExample" resultType="java.lang.Integer" >
+    select count(*) from devicescrappedapplyregist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update devicescrappedapplyregist
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.devicecoding != null" >
+        deviceCoding = #{record.devicecoding,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicename != null" >
+        deviceName = #{record.devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specification != null" >
+        Specification = #{record.specification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.applytime != null" >
+        applyTime = #{record.applytime,jdbcType=DATE},
+      </if>
+      <if test="record.zname != null" >
+        zname = #{record.zname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usedpostion != null" >
+        usedPostion = #{record.usedpostion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scrapapplicants != null" >
+        scrapApplicants = #{record.scrapapplicants,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manager != null" >
+        Manager = #{record.manager,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update devicescrappedapplyregist
+    set id = #{record.id,jdbcType=BIGINT},
+      deviceCoding = #{record.devicecoding,jdbcType=VARCHAR},
+      deviceName = #{record.devicename,jdbcType=VARCHAR},
+      Specification = #{record.specification,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      applyTime = #{record.applytime,jdbcType=DATE},
+      zname = #{record.zname,jdbcType=VARCHAR},
+      usedPostion = #{record.usedpostion,jdbcType=VARCHAR},
+      scrapApplicants = #{record.scrapapplicants,jdbcType=VARCHAR},
+      Manager = #{record.manager,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Devicescrappedapplyregist" >
+    update devicescrappedapplyregist
+    <set >
+      <if test="devicecoding != null" >
+        deviceCoding = #{devicecoding,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        deviceName = #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        Specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="applytime != null" >
+        applyTime = #{applytime,jdbcType=DATE},
+      </if>
+      <if test="zname != null" >
+        zname = #{zname,jdbcType=VARCHAR},
+      </if>
+      <if test="usedpostion != null" >
+        usedPostion = #{usedpostion,jdbcType=VARCHAR},
+      </if>
+      <if test="scrapapplicants != null" >
+        scrapApplicants = #{scrapapplicants,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        Manager = #{manager,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Devicescrappedapplyregist" >
+    update devicescrappedapplyregist
+    set deviceCoding = #{devicecoding,jdbcType=VARCHAR},
+      deviceName = #{devicename,jdbcType=VARCHAR},
+      Specification = #{specification,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      applyTime = #{applytime,jdbcType=DATE},
+      zname = #{zname,jdbcType=VARCHAR},
+      usedPostion = #{usedpostion,jdbcType=VARCHAR},
+      scrapApplicants = #{scrapapplicants,jdbcType=VARCHAR},
+      Manager = #{manager,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

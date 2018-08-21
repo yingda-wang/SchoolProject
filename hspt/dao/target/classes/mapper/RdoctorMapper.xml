@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.RdoctorMapper" >
+	<insert id="rdoctorAdd" parameterType="pojo.Rdoctor">
+		insert into rdoctor(base,name,grade,major,phone,entryTime,leaveTime)values(#{base},#{name},#{grade},#{major},#{phone},#{entryTime},#{leaveTime})
+	</insert>
+	<select id="rdoctorSearch" resultType="pojo.Rdoctor">
+		SELECT * FROM rdoctor
+	</select>
+	<select id="getrdoctorLike" parameterType="String" resultType="pojo.Rdoctor" >
+		SELECT * FROM rdoctor WHERE rdoctor.name like  CONCAT('%', #{searchName}, '%')
+	</select>
+	<delete id="delrdoctor" parameterType="String" >
+	  DELETE FROM rdoctor WHERE phone=#{phone}
+	</delete>
+</mapper>

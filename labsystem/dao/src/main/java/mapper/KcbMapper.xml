@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.KcbMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Kcb" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="yue" property="yue" jdbcType="VARCHAR" />
+    <result column="zhou" property="zhou" jdbcType="VARCHAR" />
+    <result column="xingqi1" property="xingqi1" jdbcType="VARCHAR" />
+    <result column="jieri1" property="jieri1" jdbcType="VARCHAR" />
+    <result column="xingqi2" property="xingqi2" jdbcType="VARCHAR" />
+    <result column="jieri2" property="jieri2" jdbcType="VARCHAR" />
+    <result column="xingqi3" property="xingqi3" jdbcType="VARCHAR" />
+    <result column="jieri3" property="jieri3" jdbcType="VARCHAR" />
+    <result column="xingqi4" property="xingqi4" jdbcType="VARCHAR" />
+    <result column="jieri4" property="jieri4" jdbcType="VARCHAR" />
+    <result column="xingqi5" property="xingqi5" jdbcType="VARCHAR" />
+    <result column="jieri5" property="jieri5" jdbcType="VARCHAR" />
+    <result column="xingqi6" property="xingqi6" jdbcType="VARCHAR" />
+    <result column="jieri6" property="jieri6" jdbcType="VARCHAR" />
+    <result column="xingqi7" property="xingqi7" jdbcType="VARCHAR" />
+    <result column="jieri7" property="jieri7" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, yue, zhou, xingqi1, jieri1, xingqi2, jieri2, xingqi3, jieri3, xingqi4, jieri4, 
+    xingqi5, jieri5, xingqi6, jieri6, xingqi7, jieri7
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.KcbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from kcb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from kcb
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from kcb
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.KcbExample" >
+    delete from kcb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Kcb" >
+    insert into kcb (id, yue, zhou, 
+      xingqi1, jieri1, xingqi2, 
+      jieri2, xingqi3, jieri3, 
+      xingqi4, jieri4, xingqi5, 
+      jieri5, xingqi6, jieri6, 
+      xingqi7, jieri7)
+    values (#{id,jdbcType=INTEGER}, #{yue,jdbcType=VARCHAR}, #{zhou,jdbcType=VARCHAR}, 
+      #{xingqi1,jdbcType=VARCHAR}, #{jieri1,jdbcType=VARCHAR}, #{xingqi2,jdbcType=VARCHAR}, 
+      #{jieri2,jdbcType=VARCHAR}, #{xingqi3,jdbcType=VARCHAR}, #{jieri3,jdbcType=VARCHAR}, 
+      #{xingqi4,jdbcType=VARCHAR}, #{jieri4,jdbcType=VARCHAR}, #{xingqi5,jdbcType=VARCHAR}, 
+      #{jieri5,jdbcType=VARCHAR}, #{xingqi6,jdbcType=VARCHAR}, #{jieri6,jdbcType=VARCHAR}, 
+      #{xingqi7,jdbcType=VARCHAR}, #{jieri7,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Kcb" >
+    insert into kcb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="yue != null" >
+        yue,
+      </if>
+      <if test="zhou != null" >
+        zhou,
+      </if>
+      <if test="xingqi1 != null" >
+        xingqi1,
+      </if>
+      <if test="jieri1 != null" >
+        jieri1,
+      </if>
+      <if test="xingqi2 != null" >
+        xingqi2,
+      </if>
+      <if test="jieri2 != null" >
+        jieri2,
+      </if>
+      <if test="xingqi3 != null" >
+        xingqi3,
+      </if>
+      <if test="jieri3 != null" >
+        jieri3,
+      </if>
+      <if test="xingqi4 != null" >
+        xingqi4,
+      </if>
+      <if test="jieri4 != null" >
+        jieri4,
+      </if>
+      <if test="xingqi5 != null" >
+        xingqi5,
+      </if>
+      <if test="jieri5 != null" >
+        jieri5,
+      </if>
+      <if test="xingqi6 != null" >
+        xingqi6,
+      </if>
+      <if test="jieri6 != null" >
+        jieri6,
+      </if>
+      <if test="xingqi7 != null" >
+        xingqi7,
+      </if>
+      <if test="jieri7 != null" >
+        jieri7,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="yue != null" >
+        #{yue,jdbcType=VARCHAR},
+      </if>
+      <if test="zhou != null" >
+        #{zhou,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi1 != null" >
+        #{xingqi1,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri1 != null" >
+        #{jieri1,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi2 != null" >
+        #{xingqi2,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri2 != null" >
+        #{jieri2,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi3 != null" >
+        #{xingqi3,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri3 != null" >
+        #{jieri3,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi4 != null" >
+        #{xingqi4,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri4 != null" >
+        #{jieri4,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi5 != null" >
+        #{xingqi5,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri5 != null" >
+        #{jieri5,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi6 != null" >
+        #{xingqi6,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri6 != null" >
+        #{jieri6,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi7 != null" >
+        #{xingqi7,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri7 != null" >
+        #{jieri7,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.KcbExample" resultType="java.lang.Integer" >
+    select count(*) from kcb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update kcb
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.yue != null" >
+        yue = #{record.yue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhou != null" >
+        zhou = #{record.zhou,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xingqi1 != null" >
+        xingqi1 = #{record.xingqi1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jieri1 != null" >
+        jieri1 = #{record.jieri1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xingqi2 != null" >
+        xingqi2 = #{record.xingqi2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jieri2 != null" >
+        jieri2 = #{record.jieri2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xingqi3 != null" >
+        xingqi3 = #{record.xingqi3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jieri3 != null" >
+        jieri3 = #{record.jieri3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xingqi4 != null" >
+        xingqi4 = #{record.xingqi4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jieri4 != null" >
+        jieri4 = #{record.jieri4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xingqi5 != null" >
+        xingqi5 = #{record.xingqi5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jieri5 != null" >
+        jieri5 = #{record.jieri5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xingqi6 != null" >
+        xingqi6 = #{record.xingqi6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jieri6 != null" >
+        jieri6 = #{record.jieri6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xingqi7 != null" >
+        xingqi7 = #{record.xingqi7,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jieri7 != null" >
+        jieri7 = #{record.jieri7,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update kcb
+    set id = #{record.id,jdbcType=INTEGER},
+      yue = #{record.yue,jdbcType=VARCHAR},
+      zhou = #{record.zhou,jdbcType=VARCHAR},
+      xingqi1 = #{record.xingqi1,jdbcType=VARCHAR},
+      jieri1 = #{record.jieri1,jdbcType=VARCHAR},
+      xingqi2 = #{record.xingqi2,jdbcType=VARCHAR},
+      jieri2 = #{record.jieri2,jdbcType=VARCHAR},
+      xingqi3 = #{record.xingqi3,jdbcType=VARCHAR},
+      jieri3 = #{record.jieri3,jdbcType=VARCHAR},
+      xingqi4 = #{record.xingqi4,jdbcType=VARCHAR},
+      jieri4 = #{record.jieri4,jdbcType=VARCHAR},
+      xingqi5 = #{record.xingqi5,jdbcType=VARCHAR},
+      jieri5 = #{record.jieri5,jdbcType=VARCHAR},
+      xingqi6 = #{record.xingqi6,jdbcType=VARCHAR},
+      jieri6 = #{record.jieri6,jdbcType=VARCHAR},
+      xingqi7 = #{record.xingqi7,jdbcType=VARCHAR},
+      jieri7 = #{record.jieri7,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Kcb" >
+    update kcb
+    <set >
+      <if test="yue != null" >
+        yue = #{yue,jdbcType=VARCHAR},
+      </if>
+      <if test="zhou != null" >
+        zhou = #{zhou,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi1 != null" >
+        xingqi1 = #{xingqi1,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri1 != null" >
+        jieri1 = #{jieri1,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi2 != null" >
+        xingqi2 = #{xingqi2,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri2 != null" >
+        jieri2 = #{jieri2,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi3 != null" >
+        xingqi3 = #{xingqi3,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri3 != null" >
+        jieri3 = #{jieri3,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi4 != null" >
+        xingqi4 = #{xingqi4,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri4 != null" >
+        jieri4 = #{jieri4,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi5 != null" >
+        xingqi5 = #{xingqi5,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri5 != null" >
+        jieri5 = #{jieri5,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi6 != null" >
+        xingqi6 = #{xingqi6,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri6 != null" >
+        jieri6 = #{jieri6,jdbcType=VARCHAR},
+      </if>
+      <if test="xingqi7 != null" >
+        xingqi7 = #{xingqi7,jdbcType=VARCHAR},
+      </if>
+      <if test="jieri7 != null" >
+        jieri7 = #{jieri7,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Kcb" >
+    update kcb
+    set yue = #{yue,jdbcType=VARCHAR},
+      zhou = #{zhou,jdbcType=VARCHAR},
+      xingqi1 = #{xingqi1,jdbcType=VARCHAR},
+      jieri1 = #{jieri1,jdbcType=VARCHAR},
+      xingqi2 = #{xingqi2,jdbcType=VARCHAR},
+      jieri2 = #{jieri2,jdbcType=VARCHAR},
+      xingqi3 = #{xingqi3,jdbcType=VARCHAR},
+      jieri3 = #{jieri3,jdbcType=VARCHAR},
+      xingqi4 = #{xingqi4,jdbcType=VARCHAR},
+      jieri4 = #{jieri4,jdbcType=VARCHAR},
+      xingqi5 = #{xingqi5,jdbcType=VARCHAR},
+      jieri5 = #{jieri5,jdbcType=VARCHAR},
+      xingqi6 = #{xingqi6,jdbcType=VARCHAR},
+      jieri6 = #{jieri6,jdbcType=VARCHAR},
+      xingqi7 = #{xingqi7,jdbcType=VARCHAR},
+      jieri7 = #{jieri7,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

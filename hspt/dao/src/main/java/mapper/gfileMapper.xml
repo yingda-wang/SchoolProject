@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mapper.gfileMapper">
+
+	<insert id="gfile_ADD" parameterType="pojo.gfile">
+		insert into
+		gfile(oName,operation,oVersion,gId,person,time,text)
+		values(#{oName},#{operation},#{oVersion},#{gId},#{person},#{time},#{text})
+	</insert>
+
+	<select id="gfile_SELECTALL" resultType="pojo.gfile">
+		SELECT * from oName
+	</select>
+
+    <select id="getgfileInfo" resultType="pojo.gfile">
+		SELECT * FROM gfile ,zu,POSITION WHERE zu.id=position.zId AND
+		position.id=gfile.gId
+	</select>
+	
+	 <select id="gfileSee" resultType="pojo.gfile" parameterType="int" >
+		SELECT * FROM gfile ,zu WHERE  gfile.gid = zu.id AND gfile.gId  = #{zId}
+	</select>
+	
+	<delete id="delgfileInfo" parameterType="int" >
+	  DELETE FROM gfile WHERE id=#{id}
+	</delete>
+    
+    <update id="updategfile" parameterType="pojo.gfile">
+    UPDATE gfile SET oName=#{oName},operation=#{operation},oVersion=#{oVersion},gId=#{gId},person=#{person},time=#{time},text=#{text} WHERE id=#{id}
+    </update>
+
+</mapper>  

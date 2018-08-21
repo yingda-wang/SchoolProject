@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.CourseroomMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Courseroom" >
+    <result column="courseName" property="coursename" jdbcType="VARCHAR" />
+    <result column="courseCode" property="coursecode" jdbcType="VARCHAR" />
+    <result column="roomCode" property="roomcode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    courseName, courseCode, roomCode
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.CourseroomExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from courseroom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="pojo.CourseroomExample" >
+    delete from courseroom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Courseroom" >
+    insert into courseroom (courseName, courseCode, roomCode
+      )
+    values (#{coursename,jdbcType=VARCHAR}, #{coursecode,jdbcType=VARCHAR}, #{roomcode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Courseroom" >
+    insert into courseroom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="coursename != null" >
+        courseName,
+      </if>
+      <if test="coursecode != null" >
+        courseCode,
+      </if>
+      <if test="roomcode != null" >
+        roomCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="coursename != null" >
+        #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="coursecode != null" >
+        #{coursecode,jdbcType=VARCHAR},
+      </if>
+      <if test="roomcode != null" >
+        #{roomcode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.CourseroomExample" resultType="java.lang.Integer" >
+    select count(*) from courseroom
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update courseroom
+    <set >
+      <if test="record.coursename != null" >
+        courseName = #{record.coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coursecode != null" >
+        courseCode = #{record.coursecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roomcode != null" >
+        roomCode = #{record.roomcode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update courseroom
+    set courseName = #{record.coursename,jdbcType=VARCHAR},
+      courseCode = #{record.coursecode,jdbcType=VARCHAR},
+      roomCode = #{record.roomcode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectLabCourse" resultType="pojo.Courseroom">
+  select * from courseroom 
+  </select>
+  <select id="getLabCourseLike" parameterType="String" resultType="pojo.Courseroom" >
+		select * from courseroom WHERE courseName like  CONCAT('%', #{searchName}, '%')
+	</select>
+	
+<delete id="delLabCourse" parameterType="int">
+  DELETE FROM courseroom WHERE id = #{id}
+</delete>	
+	 <select id="selectByroom" parameterType="String" resultType="pojo.Courseroom">
+  	select distinct * from courseroom where roomcode=#{roomcode};
+  </select>
+</mapper>

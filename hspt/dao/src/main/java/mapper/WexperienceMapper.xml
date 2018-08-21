@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mapper.WexperienceMapper">
+
+	<insert id="wexperience_ADD" parameterType="pojo.Wexperience">
+
+		insert into
+		wexperience(id,workAddress,classes,technicalPosition,startTime,stopTime)
+		values(#{id},#{workAddress},#{classes},#{technicalPosition},#{startTime},#{stopTime})
+	</insert>
+
+	<select id="wexperience_SELECTALL" resultType="pojo.Wexperience">
+		SELECT * from wexperience
+	</select>
+	
+    <select id="getwexperienceInfo" resultType="pojo.Wexperience">
+		SELECT * FROM wexperience
+	</select>
+	<select id="getwexperienceInfoLike" parameterType="String" resultType="pojo.Wexperience" >
+		SELECT * FROM wexperience WHERE wexperience.id  like  CONCAT('%', #{id}, '%')
+		
+	</select>
+	<delete id="delwexperienceInfo" parameterType="int" >
+	  DELETE FROM wexperience WHERE wId=#{id}
+	</delete>
+    
+    <update id="updatewexperience" parameterType="pojo.Wexperience">
+    UPDATE wexperience SET workAddress=#{workAddress},classes=#{classes},technicalPosition=#{technicalPosition},startTime=#{startTime},stopTime=#{stopTime} WHERE wId=#{wId}
+    </update>
+  
+    
+</mapper>  

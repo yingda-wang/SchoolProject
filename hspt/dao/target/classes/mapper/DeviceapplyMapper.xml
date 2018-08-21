@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DeviceapplyMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Deviceapply" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="number" property="number" jdbcType="DOUBLE" />
+    <result column="arriveTime" property="arrivetime" jdbcType="DATE" />
+    <result column="applicant" property="applicant" jdbcType="VARCHAR" />
+    <result column="dId" property="did" jdbcType="INTEGER" />
+    <result column="ifYes" property="ifyes" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, number, arriveTime, applicant, dId, ifYes
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.DeviceapplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deviceapply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from deviceapply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from deviceapply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.DeviceapplyExample" >
+    delete from deviceapply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Deviceapply" >
+    insert into deviceapply (id, name, number, 
+      arriveTime, applicant, dId, 
+      ifYes)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{number,jdbcType=DOUBLE}, 
+      #{arrivetime,jdbcType=DATE}, #{applicant,jdbcType=VARCHAR}, #{did,jdbcType=INTEGER}, 
+      #{ifyes,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Deviceapply" >
+    insert into deviceapply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="arrivetime != null" >
+        arriveTime,
+      </if>
+      <if test="applicant != null" >
+        applicant,
+      </if>
+      <if test="did != null" >
+        dId,
+      </if>
+      <if test="ifyes != null" >
+        ifYes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=DOUBLE},
+      </if>
+      <if test="arrivetime != null" >
+        #{arrivetime,jdbcType=DATE},
+      </if>
+      <if test="applicant != null" >
+        #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="did != null" >
+        #{did,jdbcType=INTEGER},
+      </if>
+      <if test="ifyes != null" >
+        #{ifyes,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.DeviceapplyExample" resultType="java.lang.Integer" >
+    select count(*) from deviceapply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update deviceapply
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=DOUBLE},
+      </if>
+      <if test="record.arrivetime != null" >
+        arriveTime = #{record.arrivetime,jdbcType=DATE},
+      </if>
+      <if test="record.applicant != null" >
+        applicant = #{record.applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.did != null" >
+        dId = #{record.did,jdbcType=INTEGER},
+      </if>
+      <if test="record.ifyes != null" >
+        ifYes = #{record.ifyes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update deviceapply
+    set id = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=DOUBLE},
+      arriveTime = #{record.arrivetime,jdbcType=DATE},
+      applicant = #{record.applicant,jdbcType=VARCHAR},
+      dId = #{record.did,jdbcType=INTEGER},
+      ifYes = #{record.ifyes,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Deviceapply" >
+    update deviceapply
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=DOUBLE},
+      </if>
+      <if test="arrivetime != null" >
+        arriveTime = #{arrivetime,jdbcType=DATE},
+      </if>
+      <if test="applicant != null" >
+        applicant = #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="did != null" >
+        dId = #{did,jdbcType=INTEGER},
+      </if>
+      <if test="ifyes != null" >
+        ifYes = #{ifyes,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Deviceapply" >
+    update deviceapply
+    set name = #{name,jdbcType=VARCHAR},
+      number = #{number,jdbcType=DOUBLE},
+      arriveTime = #{arrivetime,jdbcType=DATE},
+      applicant = #{applicant,jdbcType=VARCHAR},
+      dId = #{did,jdbcType=INTEGER},
+      ifYes = #{ifyes,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

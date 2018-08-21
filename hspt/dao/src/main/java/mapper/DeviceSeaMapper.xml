@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DeviceSeaMapper" >
+<select id="deviceSeaSel" resultType="jl.DeviceSea">
+SELECT * FROM( SELECT * FROM device a LEFT JOIN (SELECT MAX(id)AS wid,devicemaintenance.time2,devicemaintenance.mid FROM devicemaintenance GROUP BY devicemaintenance.mid) b ON a.sbid=b.mid) c LEFT JOIN ( 
+    SELECT MAX(id)AS jid,devicecalibration.time1,devicecalibration.exportid FROM devicecalibration GROUP BY devicecalibration.exportid) d ON c.sbid=d.exportid </select>
+ <select id="deviceSeaSelById" parameterType="String" resultType="jl.DeviceSea">
+ SELECT * FROM( SELECT * FROM device a LEFT JOIN (SELECT MAX(id)AS wid,devicemaintenance.time2,devicemaintenance.mid FROM devicemaintenance GROUP BY devicemaintenance.mid) b ON a.sbid=b.mid) c LEFT JOIN ( 
+    SELECT MAX(id)AS jid,devicecalibration.time1,devicecalibration.exportid FROM devicecalibration GROUP BY devicecalibration.exportid) d ON c.sbid=d.exportid 
+	where c.sbid LIKE CONCAT(CONCAT('%',#{sbid}),'%')
+</select>
+<select id="deviceSeaSelByState" parameterType="String" resultType="jl.DeviceSea">
+SELECT * FROM( SELECT * FROM device a LEFT JOIN (SELECT MAX(id)AS wid,devicemaintenance.time2,devicemaintenance.mid FROM devicemaintenance GROUP BY devicemaintenance.mid) b ON a.sbid=b.mid) c LEFT JOIN ( 
+    SELECT MAX(id)AS jid,devicecalibration.time1,devicecalibration.exportid FROM devicecalibration GROUP BY devicecalibration.exportid) d ON c.sbid=d.exportid 
+	where c.state LIKE CONCAT(CONCAT('%',#{state}),'%')
+</select>
+
+</mapper>

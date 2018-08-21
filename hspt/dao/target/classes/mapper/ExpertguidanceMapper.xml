@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.ExpertguidanceMapper" >
+	<insert id="expertguidanceAdd" parameterType="ksxs.Expertguidance">
+		insert into expertguidance(id,time,type,company,department,specialist,title,photoSave)values(#{id},#{time},#{type},#{company},#{department},#{specialist},#{title},#{photoSave})
+	</insert>
+	<select id="expertguidanceSearch" resultType="ksxs.Expertguidance">
+		SELECT * FROM expertguidance
+	</select>
+	<select id="getexpertguidanceLike" resultType="ksxs.Expertguidance">
+		SELECT * FROM expertguidance WHERE expertguidance.time like  CONCAT('%', #{searchName}, '%')
+	</select>
+	
+	<delete id="delexpertguidance" parameterType="int" >
+	  DELETE FROM expertguidance WHERE id=#{id}
+	</delete>
+</mapper>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DevicerepairnotesMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Devicerepairnotes" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="eid" property="eid" jdbcType="VARCHAR" />
+    <result column="person" property="person" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="DATE" />
+    <result column="repairTime" property="repairtime" jdbcType="DATE" />
+    <result column="repairMan" property="repairman" jdbcType="VARCHAR" />
+    <result column="question" property="question" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, eid, person, time, repairTime, repairMan, question
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.DevicerepairnotesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from devicerepairnotes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from devicerepairnotes
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from devicerepairnotes
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.DevicerepairnotesExample" >
+    delete from devicerepairnotes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Devicerepairnotes" >
+    insert into devicerepairnotes (id, eid, person, 
+      time, repairTime, repairMan, 
+      question)
+    values (#{id,jdbcType=BIGINT}, #{eid,jdbcType=VARCHAR}, #{person,jdbcType=VARCHAR}, 
+      #{time,jdbcType=DATE}, #{repairtime,jdbcType=DATE}, #{repairman,jdbcType=VARCHAR}, 
+      #{question,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Devicerepairnotes" >
+    insert into devicerepairnotes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="eid != null" >
+        eid,
+      </if>
+      <if test="person != null" >
+        person,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="repairtime != null" >
+        repairTime,
+      </if>
+      <if test="repairman != null" >
+        repairMan,
+      </if>
+      <if test="question != null" >
+        question,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="eid != null" >
+        #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="person != null" >
+        #{person,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=DATE},
+      </if>
+      <if test="repairtime != null" >
+        #{repairtime,jdbcType=DATE},
+      </if>
+      <if test="repairman != null" >
+        #{repairman,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.DevicerepairnotesExample" resultType="java.lang.Integer" >
+    select count(*) from devicerepairnotes
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update devicerepairnotes
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.eid != null" >
+        eid = #{record.eid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.person != null" >
+        person = #{record.person,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=DATE},
+      </if>
+      <if test="record.repairtime != null" >
+        repairTime = #{record.repairtime,jdbcType=DATE},
+      </if>
+      <if test="record.repairman != null" >
+        repairMan = #{record.repairman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.question != null" >
+        question = #{record.question,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update devicerepairnotes
+    set id = #{record.id,jdbcType=BIGINT},
+      eid = #{record.eid,jdbcType=VARCHAR},
+      person = #{record.person,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=DATE},
+      repairTime = #{record.repairtime,jdbcType=DATE},
+      repairMan = #{record.repairman,jdbcType=VARCHAR},
+      question = #{record.question,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Devicerepairnotes" >
+    update devicerepairnotes
+    <set >
+      <if test="eid != null" >
+        eid = #{eid,jdbcType=VARCHAR},
+      </if>
+      <if test="person != null" >
+        person = #{person,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=DATE},
+      </if>
+      <if test="repairtime != null" >
+        repairTime = #{repairtime,jdbcType=DATE},
+      </if>
+      <if test="repairman != null" >
+        repairMan = #{repairman,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null" >
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Devicerepairnotes" >
+    update devicerepairnotes
+    set eid = #{eid,jdbcType=VARCHAR},
+      person = #{person,jdbcType=VARCHAR},
+      time = #{time,jdbcType=DATE},
+      repairTime = #{repairtime,jdbcType=DATE},
+      repairMan = #{repairman,jdbcType=VARCHAR},
+      question = #{question,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

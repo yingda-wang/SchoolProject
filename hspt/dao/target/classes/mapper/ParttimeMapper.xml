@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="mapper.ParttimeMapper">
+
+	<insert id="parttime_ADD" parameterType="pojo.Parttime">
+
+		insert into
+		parttime(id,meeting,specializedMeet,duty,time,photo)
+		values(#{id},#{meeting},#{specializedMeet},#{duty},#{time},#{photo})
+	</insert>
+
+	<select id="parttime_SELECTALL" resultType="pojo.Parttime">
+		SELECT * from parttime
+	</select>
+	
+    <select id="getparttimeInfo" resultType="pojo.Parttime" parameterType="int">
+		SELECT * FROM parttime where id=#{id}
+	</select>
+	
+	<select id="getparttimeSearch" resultType="pojo.Parttime" >
+		SELECT * FROM parttime 
+	</select>
+		<select id="getparttimeInfoLike" parameterType="String" resultType="pojo.Parttime" >
+		SELECT * FROM parttime WHERE parttime.id  like  CONCAT('%', #{id}, '%')
+		
+	</select>	
+	<delete id="delparttimeInfo" parameterType="int" >
+	  DELETE FROM parttime WHERE id=#{id}
+	</delete>
+    
+    <update id="updateparttime" parameterType="pojo.Parttime">
+    UPDATE parttime SET meeting=#{meeting},specializedMeet=#{specializedMeet},duty=#{duty},time=#{time},photo=#{photo} WHERE id=#{id}
+    </update>
+  
+    
+</mapper>  
